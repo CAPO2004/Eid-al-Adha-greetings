@@ -1,43 +1,4 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
@@ -45,50 +6,55 @@
   <title>تهنئة عيد الأضحى المبارك</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center text-gray-800">
+<body class="min-h-screen flex flex-col items-center justify-center text-gray-800 bg-gradient-to-br from-green-900 to-green-600">
   <div class="relative max-w-lg w-full mx-4">
-    <!-- زخارف لأجواء العيد -->
-    <span class="sparkle" style="top: -20px; right: -20px;">✨</span>
-    <span class="sparkle" style="bottom: -20px; left: -20px;">✨</span>
+    <!-- زخارف العيد -->
+    <div class="islamic-pattern"></div>
+    <span class="sparkle" style="top: -30px; right: -30px;">🌙</span>
+    <span class="sparkle" style="bottom: -30px; left: -30px;">✨</span>
 
-    <div class="bg-white bg-opacity-90 p-8 rounded-2xl shadow-2xl card text-center">
-      <h1 class="text-4xl font-bold text-green-700 mb-6">عيد أضحى مبارك!</h1>
+    <div class="bg-white bg-opacity-95 p-8 rounded-2xl shadow-2xl card text-center">
+      <h1 class="text-4xl font-bold text-green-800 mb-6 font-amiri">عيد أضحى مبارك!</h1>
       
       <!-- العد التنازلي -->
       <div id="countdown" class="text-xl mb-8">
-        <p class="text-gray-600">متبقي على العيد:</p>
-        <p id="timer" class="text-3xl font-semibold text-green-800"></p>
+        <p class="text-gray-600 font-noto">متبقي على العيد:</p>
+        <p id="timer" class="text-3xl font-semibold text-green-900 font-amiri"></p>
       </div>
       
       <!-- إدخال الاسم -->
       <div class="mb-8">
-        <label for="name" class="block text-lg mb-3 text-gray-700">اكتب اسمك لتخصيص كارت التهنئة</label>
-        <input id="name" type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" placeholder="اسمك هنا">
-        <button onclick="generateCard()" class="mt-4 bg-green-700 text-white px-6 py-2 rounded-lg hover:bg-green-800 transition">إنشاء الكارت</button>
+        <label for="name" class="block text-lg mb-3 text-gray-700 font-noto">اكتب اسمك لتخصيص كارت التهنئة</label>
+        <input id="name" type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 font-noto" placeholder="اسمك هنا">
+        <button onclick="generateCard()" class="mt-4 bg-green-800 text-white px-6 py-2 rounded-lg hover:bg-green-900 transition font-amiri">إنشاء الكارت</button>
       </div>
       
       <!-- كارت التهنئة -->
-      <div id="greetingCard" class="hidden p-6 rounded-lg card" style="background: linear-gradient(135deg, #fefcea, #f1da36);">
-        <h2 id="greetingText" class="text-2xl font-bold text-green-900 mb-2"></h2>
-        <p id="greetingMessage" class="text-lg text-gray-800"></p>
+      <div id="greetingCard" class="hidden p-6 rounded-lg card relative" style="background: linear-gradient(135deg, #fefcea, #f1da36);">
+        <img src="https://cdn.pixabay.com/photo/2017/08/06/15/36/islamic-2593161_1280.png" alt="Eid Symbol" class="absolute top-2 right-2 w-16 opacity-50">
+        <h2 id="greetingText" class="text-2xl font-bold text-green-900 mb-2 font-amiri"></h2>
+        <p id="greetingMessage" class="text-lg text-gray-800 font-noto"></p>
         <div class="mt-4 flex justify-center gap-4">
-          <button onclick="downloadCard()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">تحميل الكارت</button>
-          <button onclick="shareCard()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">مشاركة عبر واتساب</button>
+          <button onclick="downloadCard()" class="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 font-noto">تحميل الكارت</button>
+          <button onclick="shareCard()" class="bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 font-noto">مشاركة عبر واتساب</button>
         </div>
       </div>
       
       <!-- تكبيرات العيد -->
       <div class="mt-6">
-        <button id="takbirButton" onclick="toggleTakbir()" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700">تشغيل التكبيرات</button>
+        <button id="takbirButton" onclick="toggleTakbir()" class="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-800 font-noto">تشغيل التكبيرات</button>
         <audio id="takbirat" loop>
-          <source src="https://www.islamicfinder.org/media/sounds/takbeer.mp3" type="audio/mpeg">
+          <source src="https://cdn.islamic.network/sounds/133/takbeer-eid.mp3" type="audio/mpeg">
         </audio>
       </div>
     </div>
   </div>
+  
+  <!-- إشعار التأكيد -->
+  <div id="toast" class="hidden fixed bottom-4 left-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg font-noto"></div>
 
   <script src="script.js"></script>
 </body>
