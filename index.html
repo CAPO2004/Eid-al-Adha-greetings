@@ -10,40 +10,43 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center text-gray-800 day-mode">
-  <div class="relative max-w-lg w-full mx-4">
-    <!-- زخارف العيد -->
-    <div class="islamic-pattern"></div>
-    <div class="sheep"></div>
-    <span class="sparkle" style="top: -30px; right: -30px;">🌙</span>
-    <span class="sparkle" style="bottom: -30px; left: -30px;">✨</span>
+  <div class="relative max-w-md w-full mx-4">
+    <!-- هلال العيد -->
+    <span class="crescent">🌙</span>
 
     <!-- زر تغيير الوضع -->
-    <button id="modeToggle" class="fixed top-4 left-4 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-900 font-noto">وضع الليل</button>
+    <button id="modeToggle" class="fixed top-4 left-4 bg-gray-800 text-white px-3 py-2 rounded-full hover:bg-gray-900">
+      <span id="modeIcon">☀️</span>
+    </button>
 
+    <!-- المحتوى الرئيسي -->
     <div class="bg-white bg-opacity-95 p-8 rounded-2xl shadow-2xl card text-center">
-      <h1 class="text-4xl font-bold text-green-800 mb-6 font-amiri">عيد أضحى مبارك!</h1>
+      <h1 class="text-4xl font-bold text-red-800 mb-6 font-amiri">عيد أضحى مبارك!</h1>
       
       <!-- العد التنازلي -->
       <div id="countdown" class="text-xl mb-8">
         <p class="text-gray-600 font-noto">متبقي على العيد:</p>
-        <p id="timer" class="text-3xl font-semibold text-green-900 font-amiri"></p>
+        <p id="timer" class="text-3xl font-semibold text-red-900 font-amiri"></p>
       </div>
       
       <!-- إدخال الاسم -->
       <div class="mb-8">
         <label for="name" class="block text-lg mb-3 text-gray-700 font-noto">اكتب اسمك لتخصيص كارت التهنئة</label>
-        <input id="name" type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 font-noto" placeholder="اسمك هنا">
-        <button onclick="generateCard()" class="mt-4 bg-green-800 text-white px-6 py-2 rounded-lg hover:bg-green-900 transition font-amiri">إنشاء الكارت</button>
+        <input id="name" type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 font-noto" placeholder="اسمك هنا">
+        <div class="flex justify-center gap-4 mt-4">
+          <button onclick="generateCard()" class="bg-red-800 text-white px-6 py-2 rounded-lg hover:bg-red-900 transition font-amiri">إنشاء الكارت</button>
+          <button onclick="resetForm()" class="bg-gray-700 text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition font-amiri">تفريغ الخانة</button>
+        </div>
       </div>
       
       <!-- كارت التهنئة -->
       <div id="greetingCard" class="hidden p-6 rounded-lg card relative">
         <img src="https://cdn.pixabay.com/photo/2017/08/06/15/36/islamic-2593161_1280.png" alt="Eid Symbol" class="absolute top-2 right-2 w-16 opacity-50">
-        <h2 id="greetingText" class="text-2xl font-bold text-green-900 mb-2 font-amiri"></h2>
+        <h2 id="greetingText" class="text-2xl font-bold text-red-900 mb-2 font-amiri"></h2>
         <p id="greetingMessage" class="text-lg text-gray-800 font-noto"></p>
         <div class="mt-4 flex justify-center gap-4">
           <button onclick="downloadCard()" class="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 font-noto">تحميل الكارت</button>
-          <button onclick="shareCard()" class="bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 font-noto">مشاركة عبر واتساب</button>
+          <button onclick="shareCard()" class="bg-red-700 text-white px-4 py-2 rounded-lg hover:bg-red-800 font-noto">مشاركة عبر واتساب</button>
         </div>
       </div>
       
@@ -56,14 +59,18 @@
       </div>
     </div>
 
-    <!-- توقيع أحمد عادل -->
-    <footer class="mt-6 text-center text-gray-600 font-noto">
+    <!-- الخروف المتحرك -->
+    <div class="sheep"></div>
+
+    <!-- الخط الفاصل وتوقيع أحمد عادل -->
+    <div class="divider"></div>
+    <footer class="mt-4 text-center text-gray-600 font-noto">
       <p>من صنع أحمد عادل - كل الحقوق محفوظة © 2025</p>
     </footer>
   </div>
   
   <!-- إشعار التأكيد -->
-  <div id="toast" class="hidden fixed bottom-4 left-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg font-noto"></div>
+  <div id="toast" class="hidden fixed bottom-4 left-4 bg-red-600 text-white px-4 py-2 rounded-lg shadow-lg font-noto"></div>
 
   <script src="script.js"></script>
 </body>
