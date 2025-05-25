@@ -2,7 +2,7 @@ body {
   font-family: 'Cairo', sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(135deg, #FFF8E1, #FFE082); /* تدرج كريمي لأصفر ذهبي */
+  background: linear-gradient(135deg, #FFF3E0, #FFCC80); /* تدرج برتقالي دافئ */
   color: #333333;
   transition: background 0.3s ease, color 0.3s ease;
   overflow-x: hidden;
@@ -19,8 +19,7 @@ body::before {
   height: 100%;
   pointer-events: none;
   z-index: -1;
-  background: url('https://www.transparenttextures.com/patterns/celebration.png') repeat;
-  opacity: 0.1;
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==') repeat; /* Transparent texture */
 }
 
 .balloon {
@@ -28,50 +27,49 @@ body::before {
   bottom: -50px;
   width: 40px;
   height: 50px;
-  background: #D81B60; /* وردي مبهج */
   border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
   animation: float 10s infinite ease-in-out;
   z-index: -2;
 }
 
+.balloon:nth-child(1) {
+  left: 10%;
+  background: #388E3C; /* أخضر زاهي */
+  animation-delay: 0s;
+}
+
 .balloon:nth-child(2) {
-  left: 20%;
-  background: #FDD835; /* أصفر ذهبي */
-  animation-duration: 12s;
+  left: 30%;
+  background: #FF7043; /* برتقالي مشرق */
   animation-delay: 2s;
+  animation-duration: 12s;
 }
 
 .balloon:nth-child(3) {
-  left: 40%;
-  background: #42A5F5; /* أزرق مبهج */
-  animation-duration: 8s;
+  left: 50%;
+  background: #42A5F5; /* أزرق سماوي */
   animation-delay: 4s;
+  animation-duration: 8s;
 }
 
 .balloon:nth-child(4) {
-  left: 60%;
-  background: #D81B60;
-  animation-duration: 11s;
+  left: 70%;
+  background: #388E3C;
   animation-delay: 1s;
+  animation-duration: 11s;
 }
 
 .balloon:nth-child(5) {
-  left: 80%;
-  background: #FDD835;
-  animation-duration: 9s;
+  left: 90%;
+  background: #FF7043;
   animation-delay: 3s;
+  animation-duration: 9s;
 }
 
 @keyframes float {
-  0% {
-    transform: translateY(100vh) translateX(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(50vh) translateX(20px) rotate(10deg);
-  }
-  100% {
-    transform: translateY(-50px) translateX(-20px) rotate(-10deg);
-  }
+  0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0.8; }
+  50% { transform: translateY(50vh) translateX(20px) rotate(10deg); opacity: 1; }
+  100% { transform: translateY(-50px) translateX(-20px) rotate(-10deg); opacity: 0; }
 }
 
 .container {
@@ -83,19 +81,19 @@ body::before {
 
 header h1 {
   font-size: 2.5rem;
-  color: #D81B60; /* وردي مبهج */
+  color: #388E3C; /* أخضر زاهي */
   margin-bottom: 10px;
   animation: fadeIn 1s ease-in-out;
 }
 
 .subheader {
   font-size: 1.2rem;
-  color: #FDD835; /* أصفر ذهبي */
+  color: #FFB300; /* برتقالي ذهبي */
   animation: fadeIn 1.5s ease-in-out;
 }
 
 .takbeer-section, .greeting-section {
-  background-color: #FFFDE7; /* كريمي فاتح */
+  background-color: #FFF9C4; /* أصفر فاتح دافئ */
   padding: 20px;
   margin: 20px 0;
   border-radius: 10px;
@@ -106,7 +104,7 @@ header h1 {
 
 h2 {
   font-size: 1.8rem;
-  color: #D81B60;
+  color: #388E3C;
   margin-bottom: 15px;
 }
 
@@ -124,7 +122,7 @@ h2 {
 }
 
 .play-btn {
-  background-color: #D81B60;
+  background-color: #388E3C;
   color: white;
   padding: 8px 16px;
   border: none;
@@ -135,7 +133,7 @@ h2 {
 }
 
 .play-btn:hover {
-  background-color: #C2185B; /* وردي داكن */
+  background-color: #2F6B30; /* أخضر داكن */
   transform: scale(1.05);
 }
 
@@ -145,13 +143,13 @@ h2 {
   width: 70%;
   max-width: 300px;
   margin: 10px 0;
-  border: 1px solid #FDD835;
+  border: 1px solid #FFB300;
   border-radius: 5px;
   transition: border-color 0.3s ease;
 }
 
 .generate-btn {
-  background-color: #D81B60;
+  background-color: #388E3C;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -162,7 +160,7 @@ h2 {
 }
 
 .generate-btn:hover {
-  background-color: #C2185B;
+  background-color: #2F6B30;
   transform: scale(1.05);
 }
 
@@ -181,7 +179,7 @@ h2 {
   top: 20px;
   left: 20px;
   font-size: 1.5rem;
-  background-color: #FDD835;
+  background-color: #FFB300;
   border: none;
   border-radius: 50%;
   width: 40px;
@@ -191,7 +189,7 @@ h2 {
 }
 
 .theme-toggle:hover {
-  background-color: #FBC02D;
+  background-color: #FFCA28;
   transform: scale(1.1);
 }
 
@@ -219,7 +217,7 @@ footer {
 .footer-line {
   border: 0;
   height: 1px;
-  background: linear-gradient(to left, #FDD835, #D81B60); /* تدرج ذهبي لوردي */
+  background: linear-gradient(to left, #FFB300, #388E3C); /* تدرج ذهبي لأخضر */
   margin-bottom: 10px;
 }
 
@@ -236,51 +234,51 @@ footer {
 
 /* Dark Theme */
 .dark-theme {
-  background: linear-gradient(135deg, #311B92, #B388FF); /* تدرج بنفسجي داكن لفاتح */
-  color: #EDE7F6;
+  background: linear-gradient(135deg, #1A237E, #5E97F6); /* تدرج أزرق داكن لسماوي */
+  color: #E3F2FD;
 }
 
 .dark-theme .takbeer-section, .dark-theme .greeting-section {
-  background-color: #4527A0; /* بنفسجي داكن */
+  background-color: #283593; /* أزرق داكن */
 }
 
 .dark-theme h2 {
-  color: #F06292; /* وردي فاتح */
+  color: #90CAF9; /* أزرق فاتح */
 }
 
 .dark-theme .play-btn, .dark-theme .generate-btn {
-  background-color: #F06292;
+  background-color: #90CAF9;
 }
 
 .dark-theme .play-btn:hover, .dark-theme .generate-btn:hover {
-  background-color: #EC407A;
+  background-color: #64B5F6;
 }
 
 .dark-theme .name-input {
-  border-color: #F06292;
-  background-color: #5E35B1;
-  color: #EDE7F6;
+  border-color: #90CAF9;
+  background-color: #3949AB;
+  color: #E3F2FD;
 }
 
 .dark-theme .greeting-output {
-  color: #EDE7F6;
-  background-color: #4527A0;
+  color: #E3F2FD;
+  background-color: #283593;
 }
 
 .dark-theme .theme-toggle {
-  background-color: #F06292;
+  background-color: #90CAF9;
 }
 
 .dark-theme .theme-toggle:hover {
-  background-color: #EC407A;
+  background-color: #64B5F6;
 }
 
 .dark-theme .footer-line {
-  background: linear-gradient(to left, #F06292, #4527A0);
+  background: linear-gradient(to left, #90CAF9, #283593);
 }
 
 .dark-theme footer {
-  color: #EDE7F6;
+  color: #E3F2FD;
 }
 
 /* Responsive Design */
@@ -316,18 +314,4 @@ footer {
     font-size: 0.9rem;
     padding: 8px 16px;
   }
-}
-
-/* Add balloons dynamically */
-body::after {
-  content: '';
-  position: absolute;
-  bottom: -50px;
-  left: 10%;
-  width: 40px;
-  height: 50px;
-  background: #42A5F5;
-  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-  animation: float 10s infinite ease-in-out;
-  z-index: -2;
 }
