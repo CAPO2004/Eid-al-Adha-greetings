@@ -34,8 +34,8 @@ const greetings = [
 // قائمة تصاميم الكروت
 const cardStyles = [
   { background: 'linear-gradient(135deg, #fefcea, #f1da36)', border: '#d4af37' },
-  { background: 'linear-gradient(135deg, #e0f7fa, #26a69a)', border: '#00796b' },
-  { background: 'linear-gradient(135deg, #fce4ec, #ec407a)', border: '#c2185b' }
+  { background: 'linear-gradient(135deg, #ffebee, #ef5350)', border: '#d32f2f' },
+  { background: 'linear-gradient(135deg, #f3e5f5, #ab47bc)', border: '#7b1fa2' }
 ];
 
 // استرجاع أو تهيئة قائمة العبارات والتصاميم المستخدمة
@@ -88,6 +88,13 @@ function generateCard() {
   }
 }
 
+// تفريغ الخانة
+function resetForm() {
+  document.getElementById('name').value = '';
+  document.getElementById('greetingCard').classList.add('hidden');
+  showToast('تم تفريغ الخانة بنجاح!');
+}
+
 // تحميل الكارت كصورة
 function downloadCard() {
   const card = document.getElementById('greetingCard');
@@ -115,7 +122,7 @@ function showToast(message, isError = false) {
   toast.innerText = message;
   toast.classList.remove('hidden');
   toast.classList.add('show');
-  toast.style.backgroundColor = isError ? '#dc2626' : '#15803d';
+  toast.style.backgroundColor = isError ? '#dc2626' : '#d32f2f';
   setTimeout(() => {
     toast.classList.remove('show');
     toast.classList.add('hidden');
@@ -141,18 +148,19 @@ function toggleTakbir() {
 
 // وضع ليل/نهار
 const modeToggle = document.getElementById('modeToggle');
+const modeIcon = document.getElementById('modeIcon');
 const body = document.body;
 
 function setMode(mode) {
   if (mode === 'night') {
     body.classList.remove('day-mode');
     body.classList.add('night-mode');
-    modeToggle.innerText = 'وضع النهار';
+    modeIcon.innerText = '☀️';
     localStorage.setItem('mode', 'night');
   } else {
     body.classList.remove('night-mode');
     body.classList.add('day-mode');
-    modeToggle.innerText = 'وضع الليل';
+    modeIcon.innerText = '🌙';
     localStorage.setItem('mode', 'day');
   }
 }
