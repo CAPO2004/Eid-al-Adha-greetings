@@ -9,12 +9,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center text-gray-800 bg-gradient-to-br from-green-900 to-green-600">
+<body class="min-h-screen flex flex-col items-center justify-center text-gray-800 day-mode">
   <div class="relative max-w-lg w-full mx-4">
     <!-- زخارف العيد -->
     <div class="islamic-pattern"></div>
+    <div class="sheep"></div>
     <span class="sparkle" style="top: -30px; right: -30px;">🌙</span>
     <span class="sparkle" style="bottom: -30px; left: -30px;">✨</span>
+
+    <!-- زر تغيير الوضع -->
+    <button id="modeToggle" class="fixed top-4 left-4 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-900 font-noto">وضع الليل</button>
 
     <div class="bg-white bg-opacity-95 p-8 rounded-2xl shadow-2xl card text-center">
       <h1 class="text-4xl font-bold text-green-800 mb-6 font-amiri">عيد أضحى مبارك!</h1>
@@ -33,7 +37,7 @@
       </div>
       
       <!-- كارت التهنئة -->
-      <div id="greetingCard" class="hidden p-6 rounded-lg card relative" style="background: linear-gradient(135deg, #fefcea, #f1da36);">
+      <div id="greetingCard" class="hidden p-6 rounded-lg card relative">
         <img src="https://cdn.pixabay.com/photo/2017/08/06/15/36/islamic-2593161_1280.png" alt="Eid Symbol" class="absolute top-2 right-2 w-16 opacity-50">
         <h2 id="greetingText" class="text-2xl font-bold text-green-900 mb-2 font-amiri"></h2>
         <p id="greetingMessage" class="text-lg text-gray-800 font-noto"></p>
@@ -51,6 +55,11 @@
         </audio>
       </div>
     </div>
+
+    <!-- توقيع أحمد عادل -->
+    <footer class="mt-6 text-center text-gray-600 font-noto">
+      <p>من صنع أحمد عادل - كل الحقوق محفوظة © 2025</p>
+    </footer>
   </div>
   
   <!-- إشعار التأكيد -->
