@@ -2,74 +2,54 @@ body {
   font-family: 'Cairo', sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(135deg, #FFF3E0, #FFCC80); /* تدرج برتقالي دافئ */
+  background: linear-gradient(135deg, #FFECB3, #FFCA28); /* تدرج برتقالي مبهج */
   color: #333333;
   transition: background 0.3s ease, color 0.3s ease;
   overflow-x: hidden;
   position: relative;
+  min-height: 100vh;
 }
 
-/* Background Balloons */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==') repeat; /* Transparent texture */
-}
-
+/* Balloons Animation */
 .balloon {
   position: absolute;
   bottom: -50px;
   width: 40px;
   height: 50px;
   border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-  animation: float 10s infinite ease-in-out;
-  z-index: -2;
+  animation: float 8s infinite ease-in-out;
+  z-index: -1;
 }
 
 .balloon:nth-child(1) {
-  left: 10%;
-  background: #388E3C; /* أخضر زاهي */
+  left: 15%;
+  background: #66BB6A; /* أخضر زاهي */
   animation-delay: 0s;
 }
 
 .balloon:nth-child(2) {
-  left: 30%;
+  left: 35%;
   background: #FF7043; /* برتقالي مشرق */
   animation-delay: 2s;
-  animation-duration: 12s;
 }
 
 .balloon:nth-child(3) {
-  left: 50%;
+  left: 55%;
   background: #42A5F5; /* أزرق سماوي */
   animation-delay: 4s;
-  animation-duration: 8s;
 }
 
 .balloon:nth-child(4) {
-  left: 70%;
-  background: #388E3C;
+  left: 75%;
+  background: #66BB6A;
   animation-delay: 1s;
-  animation-duration: 11s;
-}
-
-.balloon:nth-child(5) {
-  left: 90%;
-  background: #FF7043;
-  animation-delay: 3s;
-  animation-duration: 9s;
 }
 
 @keyframes float {
-  0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0.8; }
-  50% { transform: translateY(50vh) translateX(20px) rotate(10deg); opacity: 1; }
-  100% { transform: translateY(-50px) translateX(-20px) rotate(-10deg); opacity: 0; }
+  0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+  20% { opacity: 0.8; }
+  80% { opacity: 0.8; }
+  100% { transform: translateY(-50px) translateX(20px); opacity: 0; }
 }
 
 .container {
@@ -77,23 +57,25 @@ body::before {
   margin: 0 auto;
   padding: 20px;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 header h1 {
   font-size: 2.5rem;
-  color: #388E3C; /* أخضر زاهي */
+  color: #66BB6A; /* أخضر زاهي */
   margin-bottom: 10px;
   animation: fadeIn 1s ease-in-out;
 }
 
 .subheader {
   font-size: 1.2rem;
-  color: #FFB300; /* برتقالي ذهبي */
+  color: #FF7043; /* برتقالي مشرق */
   animation: fadeIn 1.5s ease-in-out;
 }
 
 .takbeer-section, .greeting-section {
-  background-color: #FFF9C4; /* أصفر فاتح دافئ */
+  background-color: #FFF9E6; /* أصفر فاتح */
   padding: 20px;
   margin: 20px 0;
   border-radius: 10px;
@@ -104,7 +86,7 @@ header h1 {
 
 h2 {
   font-size: 1.8rem;
-  color: #388E3C;
+  color: #66BB6A;
   margin-bottom: 15px;
 }
 
@@ -122,7 +104,7 @@ h2 {
 }
 
 .play-btn {
-  background-color: #388E3C;
+  background-color: #66BB6A;
   color: white;
   padding: 8px 16px;
   border: none;
@@ -133,7 +115,7 @@ h2 {
 }
 
 .play-btn:hover {
-  background-color: #2F6B30; /* أخضر داكن */
+  background-color: #4CAF50; /* أخضر داكن */
   transform: scale(1.05);
 }
 
@@ -143,13 +125,13 @@ h2 {
   width: 70%;
   max-width: 300px;
   margin: 10px 0;
-  border: 1px solid #FFB300;
+  border: 1px solid #FF7043;
   border-radius: 5px;
   transition: border-color 0.3s ease;
 }
 
 .generate-btn {
-  background-color: #388E3C;
+  background-color: #66BB6A;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -160,7 +142,7 @@ h2 {
 }
 
 .generate-btn:hover {
-  background-color: #2F6B30;
+  background-color: #4CAF50;
   transform: scale(1.05);
 }
 
@@ -179,7 +161,7 @@ h2 {
   top: 20px;
   left: 20px;
   font-size: 1.5rem;
-  background-color: #FFB300;
+  background-color: #FF7043;
   border: none;
   border-radius: 50%;
   width: 40px;
@@ -189,7 +171,7 @@ h2 {
 }
 
 .theme-toggle:hover {
-  background-color: #FFCA28;
+  background-color: #F4511E;
   transform: scale(1.1);
 }
 
@@ -217,7 +199,7 @@ footer {
 .footer-line {
   border: 0;
   height: 1px;
-  background: linear-gradient(to left, #FFB300, #388E3C); /* تدرج ذهبي لأخضر */
+  background: linear-gradient(to left, #FF7043, #66BB6A); /* تدرج برتقالي لأخضر */
   margin-bottom: 10px;
 }
 
@@ -234,7 +216,7 @@ footer {
 
 /* Dark Theme */
 .dark-theme {
-  background: linear-gradient(135deg, #1A237E, #5E97F6); /* تدرج أزرق داكن لسماوي */
+  background: linear-gradient(135deg, #1A237E, #42A5F5); /* تدرج أزرق داكن لسماوي */
   color: #E3F2FD;
 }
 
