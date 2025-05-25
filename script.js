@@ -1,53 +1,62 @@
-// Eid Takbeer Player
-const playTakbeerBtn = document.getElementById('playTakbeer');
-const takbeerAudio = document.getElementById('takbeerAudio');
-let isPlaying = false;
+// Eid Takbeerat Player
+const audioElements = {
+  yasser: document.getElementById('yasser'),
+  mishary: document.getElementById('mishary'),
+  nasser: document.getElementById('nasser')
+};
 
-playTakbeerBtn.addEventListener('click', () => {
-  if (!isPlaying) {
-    takbeerAudio.play().catch(error => alert('فشل في تشغيل التكبيرات، تحقق من الاتصال!'));
-    playTakbeerBtn.textContent = 'إيقاف التكبيرات 🎧';
-    isPlaying = true;
+function toggleAudio(id) {
+  const audio = audioElements[id];
+  const isPlaying = audio.paused === false;
+
+  // Pause all other audios
+  Object.values(audioElements).forEach(a => {
+    if (a !== audio) a.pause();
+  });
+
+  if (isPlaying) {
+    audio.pause();
+    document.querySelector(`button[onclick="toggleAudio('${id}')"]`).textContent = 'تشغيل ⏯️';
   } else {
-    takbeerAudio.pause();
-    playTakbeerBtn.textContent = 'تشغيل التكبيرات 🎧';
-    isPlaying = false;
+    audio.play().catch(() => alert('فشل في تشغيل التكبيرات، تحقق من الاتصال!'));
+    document.querySelector(`button[onclick="toggleAudio('${id}')"]`).textContent = 'إيقاف ⏯️';
   }
-});
+}
 
-// Personalized Eid Greeting Generator
+// Personalized Eid Greetings
 const nameInput = document.getElementById('nameInput');
 const greetingOutput = document.getElementById('greetingOutput');
 
 const greetings = [
-  "كل عام وأنت بخير يا {name}، عيد أضحى مبارك! 🎉",
-  "تقبل الله طاعتك يا {name}، وعيدك مبارك! 🐑",
-  "أعاده الله عليك بالخير يا {name}، عيد سعيد! 🌙",
-  "عيد أضحى مبارك يا {name}، مليء بالفرح! 🎁"
+  "عيدك مبارك يا {{name}} 🌙🐑",
+  "يا {{name}}، كل سنة وانت طيب وعيد سعيد عليك 🎉",
+  "{{name}}، عساكم من عواده! 🕋💛",
+  "تقبل الله طاعاتك يا {{name}}، وعيدك مبارك ❤️",
+  "كل عام وأنت بخير يا {{name}}، عيد أضحى سعيد 🌟",
+  "يا {{name}}، أسأل الله أن يجعل عيدك مباركًا 🎁",
+  "عيد أضحى مبارك يا {{name}}، مليء بالفرح 🐑",
+  "{{name}}، تقبل الله منكم وأهلكم 🌙",
+  "يا {{name}}، عيدك سعيد وقلوبكم مليئة بالإيمان 💚",
+  "كل سنة وأنت في خير يا {{name}}، عيد مبارك 🎉",
+  "يا {{name}}، أدام الله عليك السعادة في عيدك 🌟",
+  "{{name}}، عسى الله يتقبل منك صالح أعمالك 🕋",
+  "عيد أضحى سعيد يا {{name}}، بالحب والسلام ❤️",
+  "يا {{name}}، كل عام وأنت بألف خير 🎁",
+  "{{name}}، أعاده الله عليك باليمن والبركات 🌙",
+  "تقبل الله دعواتك يا {{name}}، وعيدك مبارك 💛",
+  "يا {{name}}، عيدك فيه الفرحة والسرور 🐑",
+  "كل سنة وأنت يا {{name}} في حفظ الله 🎉",
+  "{{name}}، عيد أضحى مبارك مليء بالخير 🌟",
+  "يا {{name}}، أسعدك الله في عيدك المبارك ❤️"
 ];
 
 function generateGreeting() {
   const name = nameInput.value.trim();
   if (name) {
-    const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)].replace('{name}', name);
+    const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)].replace('{{name}}', name);
     greetingOutput.textContent = randomGreeting;
   } else {
-    greetingOutput.textContent = 'من فضلك، أدخل اسمك أولاً! 😊';
-  }
-}
-
-// Download Greeting as Image
-function downloadGreeting() {
-  const greetingElement = document.getElementById('greetingOutput');
-  if (greetingElement.textContent) {
-    html2canvas(greetingElement).then(canvas => {
-      const link = document.createElement('a');
-      link.download = 'eid_greeting.png';
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-    });
-  } else {
-    alert('لا يوجد تهنئة للتحميل، أنشئ واحدة أولاً! 🎁');
+    greetingOutput.textContent = 'من فضلك، أدخل اسمًا أولاً! 😊';
   }
 }
 
