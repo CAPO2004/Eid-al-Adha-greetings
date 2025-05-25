@@ -10,38 +10,51 @@
 <body class="light-theme">
   <div class="container">
     <button id="themeToggle" class="theme-toggle">🌙</button>
-    
-    <header class="header">
+
+    <header>
       <h1>🎉 هدّيتك للعيد 🎁</h1>
       <p class="subheader">تهنئة عيد الأضحى المبارك 2025 🐑🌙</p>
     </header>
 
     <main>
-      <!-- Eid Takbeer Player -->
+      <!-- Eid Takbeerat Section -->
       <section class="takbeer-section">
-        <h2>📢 تشغيل تكبيرات العيد</h2>
-        <button id="playTakbeer" class="takbeer-btn">تشغيل التكبيرات 🎧</button>
-        <audio id="takbeerAudio" loop>
-          <source src="https://cdn.islamic.network/sounds/133/takbeer-eid.mp3" type="audio/mpeg">
-        </audio>
+        <h2>استمع لتكبيرات العيد 🎧</h2>
+        <div class="audio-players">
+          <div class="audio-player">
+            <label>ياسر الدوسري 🌟</label>
+            <button onclick="toggleAudio('yasser')" class="play-btn">تشغيل ⏯️</button>
+            <audio id="yasser" src="https://server10.mp3quran.net/yasser_dosri/001.mp3" type="audio/mpeg"></audio>
+          </div>
+          <div class="audio-player">
+            <label>مشاري العفاسي ✨</label>
+            <button onclick="toggleAudio('mishary')" class="play-btn">تشغيل ⏯️</button>
+            <audio id="mishary" src="https://server10.mp3quran.net/mshari/001.mp3" type="audio/mpeg"></audio>
+          </div>
+          <div class="audio-player">
+            <label>ناصر القطامي 🌙</label>
+            <button onclick="toggleAudio('nasser')" class="play-btn">تشغيل ⏯️</button>
+            <audio id="nasser" src="https://server10.mp3quran.net/nasser/001.mp3" type="audio/mpeg"></audio>
+          </div>
+        </div>
       </section>
 
-      <!-- Greeting Generator -->
+      <!-- Greeting Generator Section -->
       <section class="greeting-section">
-        <h2>🎁 رسائل تهنئة باسم</h2>
-        <label for="nameInput">اكتب اسمك:</label>
+        <h2>رسائل تهنئة بالاسم 🌟</h2>
+        <label for="nameInput">أدخل الاسم:</label>
         <input type="text" id="nameInput" placeholder="مثال: أحمد" class="name-input">
-        <button onclick="generateGreeting()" class="generate-btn">إنشاء التهنئة</button>
+        <button onclick="generateGreeting()" class="generate-btn">أنشئ تهنئة 🎉</button>
         <p id="greetingOutput" class="greeting-output"></p>
-        <button onclick="downloadGreeting()" class="download-btn">تحميل كصورة 📥</button>
       </section>
     </main>
 
     <!-- Animated Sheep -->
-    <img src="https://cdn.pixabay.com/photo/2016/03/31/20/31/sheep-1294969_1280.png" class="sheep" alt="خروف العيد">
+    <img src="https://cdn.pixabay.com/photo/2016/03/31/20/31/sheep-1294969_1280.png" alt="خروف العيد" class="sheep">
 
     <footer>
-      <p>© 2025 هدّيتك للعيد - جميع الحقوق محفوظة</p>
+      <hr class="footer-line">
+      <p>© جميع الحقوق محفوظة – أحمد عادل 2025 🐑💛</p>
     </footer>
   </div>
 
