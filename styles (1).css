@@ -1,0 +1,30 @@
+body {
+  background: linear-gradient(to bottom, #1a4731, #2d6a4f);
+  background-attachment: fixed;
+  font-family: 'Amiri', serif;
+}
+
+.card {
+  background: linear-gradient(135deg, #ffffff, #f0f0f0);
+  border: 3px solid #d4af37;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+@keyframes sparkle {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.sparkle {
+  position: absolute;
+  color: #d4af37;
+  font-size: 1.5rem;
+  animation: sparkle 2s infinite;
+}
