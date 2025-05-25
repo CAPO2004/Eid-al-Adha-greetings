@@ -4,7 +4,7 @@ body {
   padding: 0;
   background-color: #FDF6EC;
   color: #333333;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -14,13 +14,13 @@ body {
   text-align: center;
 }
 
-.header h1 {
+header h1 {
   font-size: 2.5rem;
   color: #2E7D32;
   margin-bottom: 10px;
 }
 
-.header .subheader {
+.subheader {
   font-size: 1.2rem;
   color: #D4AF37;
 }
@@ -30,7 +30,8 @@ body {
   padding: 20px;
   margin: 20px 0;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
 }
 
 h2 {
@@ -39,17 +40,31 @@ h2 {
   margin-bottom: 15px;
 }
 
-.takbeer-btn, .generate-btn, .download-btn {
+.audio-players {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.audio-player {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.play-btn {
   background-color: #2E7D32;
   color: white;
-  padding: 10px 20px;
+  padding: 8px 16px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 1rem;
+  transition: background-color 0.3s ease;
 }
 
-.takbeer-btn:hover, .generate-btn:hover, .download-btn:hover {
+.play-btn:hover {
   background-color: #1B5E20;
 }
 
@@ -61,6 +76,22 @@ h2 {
   margin: 10px 0;
   border: 1px solid #D4AF37;
   border-radius: 5px;
+  transition: border-color 0.3s ease;
+}
+
+.generate-btn {
+  background-color: #2E7D32;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.generate-btn:hover {
+  background-color: #1B5E20;
 }
 
 .greeting-output {
@@ -68,6 +99,9 @@ h2 {
   font-size: 1.2rem;
   color: #333333;
   min-height: 40px;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .theme-toggle {
@@ -81,7 +115,7 @@ h2 {
   width: 40px;
   height: 40px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
 }
 
 .theme-toggle:hover {
@@ -94,19 +128,26 @@ h2 {
   width: 80px;
   height: 80px;
   animation: walk 10s infinite linear;
+  transform: scaleX(1);
 }
 
 @keyframes walk {
-  0% { transform: translateX(100vw); }
-  50% { transform: translateX(0); }
-  100% { transform: translateX(100vw); }
+  0% { transform: translateX(100vw) scaleX(1); }
+  50% { transform: translateX(0) scaleX(1); }
+  50.01% { transform: translateX(0) scaleX(-1); }
+  100% { transform: translateX(100vw) scaleX(-1); }
 }
 
 footer {
-  margin-top: 20px;
+  margin-top: 40px;
   padding: 10px;
-  color: #333333;
-  font-size: 0.9rem;
+}
+
+.footer-line {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(to left, #D4AF37, #2E7D32);
+  margin-bottom: 10px;
 }
 
 /* Dark Theme */
@@ -123,11 +164,11 @@ footer {
   color: #81C784;
 }
 
-.dark-theme .takbeer-btn, .dark-theme .generate-btn, .dark-theme .download-btn {
+.dark-theme .play-btn, .dark-theme .generate-btn {
   background-color: #81C784;
 }
 
-.dark-theme .takbeer-btn:hover, .dark-theme .generate-btn:hover, .dark-theme .download-btn:hover {
+.dark-theme .play-btn:hover, .dark-theme .generate-btn:hover {
   background-color: #66BB6A;
 }
 
@@ -139,6 +180,7 @@ footer {
 
 .dark-theme .greeting-output {
   color: #eeeeee;
+  background-color: #2c2c2c;
 }
 
 .dark-theme .theme-toggle {
@@ -149,17 +191,21 @@ footer {
   background-color: #66BB6A;
 }
 
+.dark-theme .footer-line {
+  background: linear-gradient(to left, #81C784, #2c2c2c);
+}
+
 .dark-theme footer {
   color: #eeeeee;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .header h1 {
+  header h1 {
     font-size: 2rem;
   }
 
-  .header .subheader {
+  .subheader {
     font-size: 1rem;
   }
 
@@ -167,13 +213,23 @@ footer {
     font-size: 1.5rem;
   }
 
-  .takbeer-btn, .generate-btn, .download-btn {
+  .audio-player {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .play-btn {
     font-size: 0.9rem;
-    padding: 8px 16px;
+    padding: 6px 12px;
   }
 
   .name-input {
     width: 100%;
     max-width: none;
+  }
+
+  .generate-btn {
+    font-size: 0.9rem;
+    padding: 8px 16px;
   }
 }
