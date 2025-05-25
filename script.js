@@ -1,175 +1,78 @@
-// العد التنازلي لعيد الأضحى (16 يونيو 2025)
-const eidDate = new Date('June 16, 2025 00:00:00').getTime();
-
-function updateCountdown() {
-  const now = new Date().getTime();
-  const distance = eidDate - now;
-  
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-  
-  document.getElementById('timer').innerText = `${days} أيام ${hours} ساعات ${minutes} دقائق ${seconds} ثواني`;
-  
-  if (distance < 0) {
-    document.getElementById('timer').innerText = 'عيد أضحى مبارك! العيد بدأ!';
-  }
-}
-
-setInterval(updateCountdown, 1000);
-
-// قائمة عبارات التهنئة
-const greetings = [
-  "كل عام وأنت بخير، عيد أضحى مبارك!",
-  "تقبل الله طاعتكم، وعيدكم مبارك!",
-  "أعاده الله عليك بالخير واليمن والبركات!",
-  "عيد أضحى سعيد، مليء بالفرح والسعادة!",
-  "أسأل الله أن يجعل عيدكم فرحة وسرور!",
-  "عيدكم مبارك، وكل عام وأنتم إلى الله أقرب!",
-  "أدام الله أعيادكم بالخير والبركة!",
-  "عيد سعيد يملؤه الفرح والمحبة!"
-];
-
-// قائمة تصاميم الكروت
-const cardStyles = [
-  { background: 'linear-gradient(135deg, #fefcea, #f1da36)', border: '#d4af37' },
-  { background: 'linear-gradient(135deg, #ffebee, #ef5350)', border: '#d32f2f' },
-  { background: 'linear-gradient(135deg, #f3e5f5, #ab47bc)', border: '#7b1fa2' }
-];
-
-// استرجاع أو تهيئة قائمة العبارات والتصاميم المستخدمة
-let usedGreetings = JSON.parse(localStorage.getItem('usedGreetings')) || [];
-let usedStyles = JSON.parse(localStorage.getItem('usedStyles')) || [];
-
-function getRandomGreeting() {
-  let availableGreetings = greetings.filter(g => !usedGreetings.includes(g));
-  if (availableGreetings.length === 0) {
-    usedGreetings = [];
-    availableGreetings = greetings;
-  }
-  const randomIndex = Math.floor(Math.random() * availableGreetings.length);
-  const selectedGreeting = availableGreetings[randomIndex];
-  usedGreetings.push(selectedGreeting);
-  localStorage.setItem('usedGreetings', JSON.stringify(usedGreetings));
-  return selectedGreeting;
-}
-
-function getRandomStyle() {
-  let availableStyles = cardStyles.filter((_, i) => !usedStyles.includes(i));
-  if (availableStyles.length === 0) {
-    usedStyles = [];
-    availableStyles = cardStyles;
-  }
-  const randomIndex = Math.floor(Math.random() * availableStyles.length);
-  const selectedStyle = availableStyles[randomIndex];
-  usedStyles.push(cardStyles.indexOf(selectedStyle));
-  localStorage.setItem('usedStyles', JSON.stringify(usedStyles));
-  return selectedStyle;
-}
-
-// إنشاء كارت التهنئة
-function generateCard() {
-  const name = document.getElementById('name').value.trim();
-  const greetingCard = document.getElementById('greetingCard');
-  const greetingText = document.getElementById('greetingText');
-  const greetingMessage = document.getElementById('greetingMessage');
-  
-  if (name) {
-    greetingText.innerText = `عزيزي/عزيزتي ${name}`;
-    greetingMessage.innerText = getRandomGreeting();
-    const style = getRandomStyle();
-    greetingCard.style.background = style.background;
-    greetingCard.style.borderColor = style.border;
-    greetingCard.classList.remove('hidden');
-    showToast('تم إنشاء الكارت بنجاح!');
-  } else {
-    showToast('من فضلك، اكتب اسمك أولاً!', true);
-  }
-}
-
-// تفريغ الخانة
-function resetForm() {
-  document.getElementById('name').value = '';
-  document.getElementById('greetingCard').classList.add('hidden');
-  showToast('تم تفريغ الخانة بنجاح!');
-}
-
-// تحميل الكارت كصورة
-function downloadCard() {
-  const card = document.getElementById('greetingCard');
-  html2canvas(card).then(canvas => {
-    const link = document.createElement('a');
-    link.download = 'eid_greeting.png';
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-    showToast('تم تحميل الكارت بنجاح!');
-  });
-}
-
-// مشاركة الكارت عبر واتساب
-function shareCard() {
-  const name = document.getElementById('name').value.trim();
-  const message = document.getElementById('greetingMessage').innerText;
-  const shareText = `عيد أضحى مبارك! ${name}، ${message}`;
-  window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`);
-  showToast('تمت المشاركة عبر واتساب!');
-}
-
-// إشعار التأكيد
-function showToast(message, isError = false) {
-  const toast = document.getElementById('toast');
-  toast.innerText = message;
-  toast.classList.remove('hidden');
-  toast.classList.add('show');
-  toast.style.backgroundColor = isError ? '#dc2626' : '#d32f2f';
-  setTimeout(() => {
-    toast.classList.remove('show');
-    toast.classList.add('hidden');
-  }, 3000);
-}
-
-// تشغيل/إيقاف التكبيرات
+// Eid Takbeer Player
+const playTakbeerBtn = document.getElementById('playTakbeer');
+const takbeerAudio = document.getElementById('takbeerAudio');
 let isPlaying = false;
-function toggleTakbir() {
-  const audio = document.getElementById('takbirat');
-  const button = document.getElementById('takbirButton');
-  if (isPlaying) {
-    audio.pause();
-    button.innerText = 'تشغيل التكبيرات';
-    showToast('تم إيقاف التكبيرات');
+
+playTakbeerBtn.addEventListener('click', () => {
+  if (!isPlaying) {
+    takbeerAudio.play().catch(error => alert('فشل في تشغيل التكبيرات، تحقق من الاتصال!'));
+    playTakbeerBtn.textContent = 'إيقاف التكبيرات 🎧';
+    isPlaying = true;
   } else {
-    audio.play().catch(() => showToast('خطأ في تشغيل التكبيرات، تحقق من الرابط!', true));
-    button.innerText = 'إيقاف التكبيرات';
-    showToast('تم تشغيل التكبيرات');
+    takbeerAudio.pause();
+    playTakbeerBtn.textContent = 'تشغيل التكبيرات 🎧';
+    isPlaying = false;
   }
-  isPlaying = !isPlaying;
+});
+
+// Personalized Eid Greeting Generator
+const nameInput = document.getElementById('nameInput');
+const greetingOutput = document.getElementById('greetingOutput');
+
+const greetings = [
+  "كل عام وأنت بخير يا {name}، عيد أضحى مبارك! 🎉",
+  "تقبل الله طاعتك يا {name}، وعيدك مبارك! 🐑",
+  "أعاده الله عليك بالخير يا {name}، عيد سعيد! 🌙",
+  "عيد أضحى مبارك يا {name}، مليء بالفرح! 🎁"
+];
+
+function generateGreeting() {
+  const name = nameInput.value.trim();
+  if (name) {
+    const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)].replace('{name}', name);
+    greetingOutput.textContent = randomGreeting;
+  } else {
+    greetingOutput.textContent = 'من فضلك، أدخل اسمك أولاً! 😊';
+  }
 }
 
-// وضع ليل/نهار
-const modeToggle = document.getElementById('modeToggle');
-const modeIcon = document.getElementById('modeIcon');
+// Download Greeting as Image
+function downloadGreeting() {
+  const greetingElement = document.getElementById('greetingOutput');
+  if (greetingElement.textContent) {
+    html2canvas(greetingElement).then(canvas => {
+      const link = document.createElement('a');
+      link.download = 'eid_greeting.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
+  } else {
+    alert('لا يوجد تهنئة للتحميل، أنشئ واحدة أولاً! 🎁');
+  }
+}
+
+// Theme Toggle
+const themeToggle = document.getElementById('themeToggle');
 const body = document.body;
 
-function setMode(mode) {
-  if (mode === 'night') {
-    body.classList.remove('day-mode');
-    body.classList.add('night-mode');
-    modeIcon.innerText = '☀️';
-    localStorage.setItem('mode', 'night');
+themeToggle.addEventListener('click', () => {
+  if (body.classList.contains('light-theme')) {
+    body.classList.remove('light-theme');
+    body.classList.add('dark-theme');
+    themeToggle.textContent = '☀️';
+    localStorage.setItem('theme', 'dark');
   } else {
-    body.classList.remove('night-mode');
-    body.classList.add('day-mode');
-    modeIcon.innerText = '🌙';
-    localStorage.setItem('mode', 'day');
+    body.classList.remove('dark-theme');
+    body.classList.add('light-theme');
+    themeToggle.textContent = '🌙';
+    localStorage.setItem('theme', 'light');
   }
-}
-
-// تحميل الوضع المحفوظ
-const savedMode = localStorage.getItem('mode') || 'day';
-setMode(savedMode);
-
-modeToggle.addEventListener('click', () => {
-  const currentMode = body.classList.contains('night-mode') ? 'day' : 'night';
-  setMode(currentMode);
 });
+
+// Load saved theme
+const savedTheme = localStorage.getItem('theme') || 'light';
+if (savedTheme === 'dark') {
+  body.classList.remove('light-theme');
+  body.classList.add('dark-theme');
+  themeToggle.textContent = '☀️';
+}
