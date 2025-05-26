@@ -211,6 +211,54 @@ h1 {
     color: var(--secondary-color);
 }
 
+.countdown {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--shadow-color);
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.countdown h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+#timer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.timer-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer-unit span {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--name-color);
+    background: var(--btn-gradient);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    min-width: 60px;
+    text-align: center;
+}
+
+.timer-unit p {
+    margin-top: 8px;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
 .form-container {
     background-color: var(--card-bg);
     padding: 30px;
@@ -466,6 +514,20 @@ footer {
         top: -5px;
         left: 50px;
     }
+    
+    .countdown h2 {
+        font-size: 1.3rem;
+    }
+    
+    .timer-unit span {
+        font-size: 1.5rem;
+        padding: 8px 15px;
+        min-width: 50px;
+    }
+    
+    .timer-unit p {
+        font-size: 0.9rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -496,5 +558,19 @@ footer {
     
     .recipient {
         font-size: 1.5rem;
+    }
+    
+    .countdown h2 {
+        font-size: 1.1rem;
+    }
+    
+    .timer-unit span {
+        font-size: 1.2rem;
+        padding: 6px 12px;
+        min-width: 40px;
+    }
+    
+    .timer-unit p {
+        font-size: 0.8rem;
     }
 }
