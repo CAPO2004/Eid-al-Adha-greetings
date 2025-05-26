@@ -3,91 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تهاني عيد الأضحى المبارك</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>تهنئة عيد الأضحى</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script type="module" src="script.js"></script>
 </head>
-<body class="light-mode">
+<body>
     <div class="background-container">
         <div class="balloons-container"></div>
     </div>
 
     <div class="theme-toggle">
-        <button id="theme-button">
-            <i class="fas fa-moon"></i>
-        </button>
+        <button id="theme-button"><i class="fas fa-moon"></i></button>
     </div>
 
     <div class="audio-control">
-        <button id="audio-button">
-            <i class="fas fa-volume-up"></i>
-        </button>
-        <audio id="takbirat" loop>
-            <source src="" type="audio/mpeg">
-            متصفحك لا يدعم تشغيل الصوت
-        </audio>
+        <button id="audio-button"><i class="fas fa-volume-up"></i></button>
     </div>
+
+    <audio id="takbirat">
+        <source src="assets/takbirat.ogg" type="audio/ogg">
+        متصفحك لا يدعم تشغيل الصوت
+    </audio>
 
     <div class="container">
         <div class="sheep-container">
-            <img src="assets/images/new/sheep_transparent.png" alt="خروف العيد" class="sheep-img">
+            <img src="assets/images/new/sheep.png" alt="خروف العيد" class="sheep-img">
         </div>
 
         <div class="content">
             <h1>عيد أضحى مبارك</h1>
             <p class="subtitle">أجمل التهاني بمناسبة عيد الأضحى المبارك</p>
 
+            <!-- Countdown Timer -->
+            <div id="countdown-timer" class="countdown">
+                <h2>الوقت المتبقي حتى عيد الأضحى</h2>
+                <div id="timer">
+                    <div class="timer-unit">
+                        <span id="days">00</span>
+                        <p>أيام</p>
+                    </div>
+                    <div class="timer-unit">
+                        <span id="hours">00</span>
+                        <p>ساعات</p>
+                    </div>
+                    <div class="timer-unit">
+                        <span id="minutes">00</span>
+                        <p>دقائق</p>
+                    </div>
+                    <div class="timer-unit">
+                        <span id="seconds">00</span>
+                        <p>ثوان</p>
+                    </div>
+                </div>
+            </div>
+
             <div id="greeting-form" class="form-container">
                 <div class="input-group">
                     <label for="name">أدخل اسمك:</label>
-                    <input type="text" id="name" placeholder="اسمك الكريم" required>
+                    <input type="text" id="name" placeholder="اسمك هنا">
                 </div>
-                <button id="generate-card" class="btn">إنشاء بطاقة التهنئة</button>
+                <button id="generate-card" class="btn">
+                    <i class="fas fa-gift"></i> إنشاء بطاقة التهنئة
+                </button>
             </div>
 
             <div id="greeting-card" class="card-container hidden">
                 <div class="card">
+                    <div class="card-decoration">
+                        <img src="assets/images/new/kaaba_background.png" alt="زخرفة البطاقة">
+                    </div>
+                    <div class="card-balloons"></div>
+                    <img src="assets/images/new/sheep.png" alt="خروف العيد" class="card-sheep-img">
                     <div class="card-header">
                         <h2>عيد أضحى مبارك</h2>
                     </div>
                     <div class="card-body">
-                        <div class="card-decoration">
-                            <img src="assets/images/new/sheep_transparent.png" alt="خروف العيد" class="card-sheep-img">
-                            <div class="card-balloons"></div>
-                        </div>
                         <p id="greeting-text"></p>
                         <p id="recipient-name" class="recipient"></p>
                     </div>
                     <div class="card-footer">
-                        <p>تهنئة من: أحمد عادل</p>
+                        تهنئة من: أحمد عادل
                     </div>
                 </div>
-
                 <div class="card-actions">
-                    <button id="download-card" class="btn">
-                        <i class="fas fa-download"></i> تحميل البطاقة
-                    </button>
-                    <button id="new-card" class="btn">
-                        <i class="fas fa-redo"></i> بطاقة جديدة
-                    </button>
+                    <button id="download-card" class="btn"><i class="fas fa-download"></i> تحميل البطاقة</button>
+                    <button id="new-card" class="btn"><i class="fas fa-plus"></i> بطاقة جديدة</button>
                     <div class="share-buttons">
                         <p>مشاركة على:</p>
                         <div class="social-icons">
-                            <button id="share-facebook" class="social-btn facebook">
-                                <i class="fab fa-facebook-f"></i>
-                            </button>
-                            <button id="share-twitter" class="social-btn twitter">
-                                <i class="fab fa-twitter"></i>
-                            </button>
-                            <button id="share-whatsapp" class="social-btn whatsapp">
-                                <i class="fab fa-whatsapp"></i>
-                            </button>
-                            <button id="share-telegram" class="social-btn telegram">
-                                <i class="fab fa-telegram"></i>
-                            </button>
+                            <button id="share-facebook" class="social-btn facebook"><i class="fab fa-facebook-f"></i></button>
+                            <button id="share-twitter" class="social-btn twitter"><i class="fab fa-twitter"></i></button>
+                            <button id="share-whatsapp" class="social-btn whatsapp"><i class="fab fa-whatsapp"></i></button>
+                            <button id="share-telegram" class="social-btn telegram"><i class="fab fa-telegram-plane"></i></button>
                         </div>
                     </div>
                 </div>
@@ -96,10 +106,7 @@
     </div>
 
     <footer>
-        <p>جميع حقوق الطبع والنشر محفوظة &copy; أحمد عادل <span id="current-year"></span></p>
+        جميع حقوق الطبع والنشر محفوظة © أحمد عادل <span id="current-year"></span>
     </footer>
-
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script type="module" src="script.js"></script>
 </body>
 </html>
