@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (senderName) {
         const welcomeMessage = document.createElement('div');
         welcomeMessage.className = 'welcome-message';
-        welcomeMessage.innerHTML = `<p>لقد تلقيت تهنئة بعيد الأضحى من <strong>${senderName}</strong></p>`;
+        welcomeMessage.innerHTML = `<p>لقد تلقيت تهنئة بعيد الأضحى يا <strong>${senderName}</strong></p>`;
         document.querySelector('.content').prepend(welcomeMessage);
         
         // إخفاء نموذج الإدخال وإظهار بطاقة التهنئة تلقائياً
