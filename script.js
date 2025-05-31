@@ -389,8 +389,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (playPromise !== undefined) {
         playPromise.catch(function(error) {
             console.log('تشغيل الصوت تلقائياً غير مسموح، يرجى النقر على زر التشغيل');
-            audioIcon.classList.remove('fa-volume-up');
-            audioIcon.classList.add('fa-volume-mute');
+            // تم إزالة تغيير الأيقونة هنا لتبقى ظاهرة كـ "صوت يعمل" افتراضياً
+            // audioIcon.classList.remove('fa-volume-up');
+            // audioIcon.classList.add('fa-volume-mute');
         });
     }
 });
