@@ -68,7 +68,7 @@ body {
 
 .balloon {
     position: absolute;
-    width: 40px;
+    width: 60px;
     height: auto;
     animation: float 15s ease-in-out infinite;
     opacity: 0.7;
@@ -146,7 +146,7 @@ body {
 }
 
 .sheep-img {
-    width: 120px;
+    width: 160px;
     height: auto;
     position: relative;
     animation: walk 20s linear infinite;
@@ -398,7 +398,7 @@ input:focus {
 }
 
 .card-balloon {
-    width: 40px;
+    width: 55px;
     height: auto;
     position: absolute;
     opacity: 0.8;
